@@ -1,20 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import { ImageBackground, StyleSheet, Text, View,SafeAreaView } from 'react-native'
+import GameStartScreen from './screens/GameStartScreen'
+import { LinearGradient } from 'expo-linear-gradient'
+import { useState } from 'react'
+import GameScreen from './screens/GameScreen'
+import colors from './constants/colors'
 
-export default function App() {
+export default function App () {
+  const [userPickedNumer, setUserPickedNumber] = useState(null)
+
+  const pickedNumberHandler = pNum => {
+    setUserPickedNumber(pNum)
+  }
+
+
+  let screen = <GameStartScreen onPickNumber={pickedNumberHandler} />
+
+  if(userPickedNumer){
+    screen = <GameScreen />
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Guess the number</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <>
+      <LinearGradient
+        colors={[colors.primary700, colors.goldy500]}
+        style={styles.rootScreen}
+      >
+        <ImageBackground
+          style={styles.rootScreen}
+          resizeMode='cover'
+          source={require('./assets/images/background.png')}
+          imageStyle={styles.backgroundImage}
+        >
+        <SafeAreaView style={styles.rootScreen}>
+        {screen}
+        </SafeAreaView>
+       
+        </ImageBackground>
+      </LinearGradient>
+    </>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  rootScreen: {
+    flex: 1
   },
-});
+  backgroundImage: {
+    opacity: 0.15
+  }
+})
