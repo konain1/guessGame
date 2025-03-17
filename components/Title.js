@@ -1,12 +1,12 @@
 import { StyleSheet, View,Text } from "react-native"
 import colors from "../constants/colors"
 
-function Title({children}){
+function Title({children,style}){
 return(
     <>
 
 <View>
-<Text style={styles.title}>{children} </Text>
+<Text style={[styles.title,style]}>{children} </Text>
 </View>
     </>
 )

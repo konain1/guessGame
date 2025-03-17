@@ -1,7 +1,9 @@
 import { Text, View, StyleSheet, TextInput, Alert } from 'react-native'
 import PrimaryButton from '../components/PrimaryButton'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import colors from '../constants/colors'
+import Title from '../components/Title'
+
 
 
 function GameStartScreen ({onPickNumber}) {
@@ -24,15 +26,23 @@ function GameStartScreen ({onPickNumber}) {
             Alert.alert('Invalid number! ','Number has to be number between 1 to 99',[
                 {text:'Okay',style:'destructive',onPress:resetInputHandler}
             ])
-         
             return;
         }
-
         onPickNumber(chosenNumber)
     }
 
+   
+
+ 
   return (
+
+    <View style={styles.rootContainer}>
+
+    <Title style={{fontFamily:'RockSalt-Regular',color:'lightpink'}}>Guess my Number</Title>
+    {/* <Text style={{fontFamily:'RockSalt-Regular'}}>Gusee my Number</Text> */}
+
     <View style={styles.mainContainer}>
+        <Text style={styles.instructionsText}>Enter a Number</Text>
       <TextInput
         style={styles.textInput}
         maxLength={2}
@@ -53,12 +63,16 @@ function GameStartScreen ({onPickNumber}) {
       </View>
       </View>
     </View>
+    </View>
   )
 }
 
 export default GameStartScreen
 
 const styles = StyleSheet.create({
+    rootContainer:{
+        alignItems:'center'
+    },
   mainContainer: {
     marginTop: 80,
     backgroundColor: colors.primary700,
@@ -81,7 +95,12 @@ const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center',
     fontWeight: 'bold'
+  },instructionsText:{
+    fontSize:24,
+    color:colors.goldy400,
+    fontFamily:'RockSalt-Regular'
   },
+
   buttonView: {
     justifyContent: 'center',
     flexDirection:'row',
